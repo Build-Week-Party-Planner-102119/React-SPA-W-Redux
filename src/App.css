@@ -1,0 +1,575 @@
+html {
+  font-size: 62.5%;
+}
+
+.App {
+  text-align: center;
+  font-family: 'Quicksand', sans-serif;
+  background: #354356;;
+}
+
+.App-header {
+  background-color: #354356;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #09d3ac;
+}
+
+
+
+/* Banner Style  */
+.banner  nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color:#ECEBE7;
+  padding: 3% 2%;
+
+  }
+
+  .active {
+    font-weight: bold;
+    font-size: 2.5rem;
+  }
+
+.banner nav  div{
+  font-size: 1.8rem;
+}
+
+nav a {
+  color: #354356;
+  font-family: 'Quicksand', sans-serif;
+  text-decoration: none;
+}
+
+nav a:hover {
+  text-decoration: none;
+}
+.links a {
+  margin: 0 20px 0;
+}
+
+.banner .register  .logout{
+  color: rgba(255, 6, 6, 1);
+  font-family: 'Quicksand', sans-serif;
+  text-decoration: none;
+  border: none;
+  font-size: 1.8rem ;
+  background: none;
+}
+
+.nav-bar a:hover {
+  background: rgba(144, 148, 156, 0.4);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.btn-outline {
+  border: 1px solid #354356;
+  margin-left: 5px;
+  border-radius: 5px;
+  padding: 5px 10px;
+  background-color: #90949C;
+  color: #ECEBE7;
+}
+
+/* End Banner Style */
+
+
+
+/* WElcome  */
+
+@keyframes mymove {
+ from {margin-left: -200px;}
+ to {margin-left: 80px;}
+}
+
+@keyframes opac {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+.welcome {
+  padding: 180px;
+  padding-left: 20px;
+  /* min-height: 65vh; */
+  display: flex;
+  flex-direction: column;
+  /* justify-content: flex-start; */
+  align-items: flex-start;
+  background: url(./party.png) no-repeat;
+  background-size: cover;
+}
+
+.welcome .welh1 {
+  margin:50px 10px 50px 80px;
+  color:#ECEBE7;
+  font-size: 4.5rem;
+  animation: mymove 2.2s;
+  animation-fill-mode: forwards;
+  font-family: 'Handlee', cursive;
+
+}
+
+
+
+.welcome .welcom-links { 
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-left: 100px;
+  font-family: 'Handlee', cursive;
+
+}
+
+
+.welcome .welcom-links a:first-child {
+  opacity: 0;
+  animation: opac 2s 1.4s;
+  animation-fill-mode: forwards;
+}
+
+.welcome .welcom-links a:last-child {
+  opacity: 0;
+  animation: opac 2s 2s;
+  animation-fill-mode: forwards;
+
+}
+.welcome .welcom-links a {
+  text-decoration: none;
+  font-size: 3rem;
+  color: #90949c;
+  margin-bottom: 40px;
+}
+
+.welcome .welcom-links a:hover {
+  text-decoration: none;
+}
+
+
+
+
+
+
+
+
+/* Form Style  */
+
+.FormWrap h1 {
+  /* align-self: flex-start; */
+  font-size: 3.5rem;
+  line-height: 2;
+  color: #90949c;
+  font-family: 'Handlee', cursive;
+
+
+}
+
+/*  Input Style */
+form input {
+  width: 40%;
+  font-size: 20px;
+  height: 40px;
+  border: none;
+  padding-left: 10px;
+  margin-bottom: 40px;
+  background: #ECEBE7;
+}
+
+
+
+
+/* Label  */
+form label {
+  color: #ECEBE7;
+  width: 40%;
+  font-size: 25px;
+  margin-bottom: 10px;
+  justify-content: flex-start ;
+  text-align: start;
+}
+
+/*  Submit Form Button */
+form .submitbtn, .submitbtn {
+  font-size: 18px;
+  width: 200px;
+  height: 40px;
+  color: #354356;
+  background: #90949c;
+  justify-self: flex-end;
+  text-align: center;
+  border: black 1px solid ;
+  border-radius: 5px;
+  margin-top: 30px;
+}
+
+form .submitbtn:hover {
+  color: #ECEBE7;
+}
+ /*  Back Button Link */
+.backbtn {
+  align-self: center;
+  height: 40px;
+  outline: none;
+  text-align: start;
+
+}
+
+/* Back Button  */
+.backbtn button {
+  font-size: 18px;
+  width: 150px;
+  height: 40px;
+  color: #354356;
+  background: #90949c;
+  text-align: center;
+  border: black 1px solid ;
+  border-radius: 5px;
+  margin-top: 30px;
+
+}
+
+.backbtn button:hover {
+  color: #ECEBE7;
+
+}
+
+
+/* Footer  */
+
+footer  {
+  padding: 4%;
+  background-color:#ECEBE7;
+}
+
+footer  p {
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+
+/* user page  */
+
+.userWeb {
+  background: #6d7d8a;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  min-height: 20vh;
+
+}
+
+.userWeb img {
+  border-radius: 10px;
+}
+
+.userPage {
+  min-height: 40vh;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+
+
+.editeForm {
+  background: rgba(34, 45, 61,0.9);
+  position:  fixed;
+  top: 25px;
+  z-index: 1;
+  animation: fadeIn 1s;
+  width: 40%;
+  border-radius: 10px;
+  padding: 30px 0;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  border: black 1px solid;
+
+}
+
+.editeForm input, #editeForm label {
+  font-size: 1.9rem;
+}
+
+.editeForm label {
+  width: 25%;
+}
+
+.editeForm input {
+  font-size: 1.5rem;
+  width: 60%;
+  margin-bottom: 20px;
+}
+
+
+
+/* Create New Event Link */
+.createlink {
+  padding-top: 50px;
+  font-size: 3rem;
+  height: 30px;
+  color: #222d3d;
+  text-decoration: none;
+  padding-bottom: 50px;
+  margin: 50px auto;
+  text-shadow: white 1px 3px 10px
+
+}
+
+.createlink:hover {
+  animation: coloring 2s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes coloring {
+  0% { color: #222d3d ;
+        font-size: 3rem;}
+  50% { color: #ECEBE7;
+        font-size: 4rem;
+      }
+  100% {color: #222d3d;
+      font-size: 3rem;}
+
+}
+
+
+
+
+
+/*  Card Event  */
+
+.userevent {
+  padding-top: 25px;
+  min-height: 20vh ;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  background: #6d7d8a;
+}
+
+.userpage:hover {
+  opacity: 1;
+}
+
+.userpage h1 {
+  width: 100%;
+  font-size: 4rem;
+  font-family: 'Handlee', cursive;
+
+}
+
+.userpage p {
+  font-size: 2.2rem;
+  text-align: start;
+  width: 55%;
+  color: #080b0f;
+}
+
+.userpage h3 {
+  font-size: 2.2rem;
+  width: 30%;
+  line-height: 0.7;
+  text-align: start;
+}
+
+.btn {
+  width: 100px;
+  border: none;
+  outline: none;
+  background: none;
+  color: #90949c;
+}
+
+.btn:hover {
+  color: #ecebe7;
+}
+
+
+/* All Event Page  */
+
+.imagesDiv {
+  display: flex;
+  justify-content: space-evenly;
+}
+.imagesDiv img {
+  border-radius: 150px;
+}
+
+
+/*  Media  */
+
+@media (max-width:500px) {
+  form input {
+    width: 60%;
+    font-size: 1.6rem;
+  }
+
+  .FormWrap .resigform label {
+    width: 80%;
+}
+
+.FormWrap  .create input{
+  width: 80%;
+}
+.FormWrap  .create label{
+  font-size: 2rem;
+}
+
+
+}
+
+
+@media (max-width:1500px) {
+
+  .banner {
+    font-size: 1.5rem;
+  }
+
+  .banner .links{
+    width:30%;
+  }
+
+  .userpage {
+    width: 40%;
+}
+}
+
+
+  @media (max-width:1024px) {
+
+    .banner .links{
+      width:40%;
+    }
+    .image-1 {
+      display: none;
+    }
+
+    #editeFormid {
+      width: 80%;
+    }
+    
+    #editeFormid label {
+      font-size: 2rem;
+    }
+
+}
+
+@media (max-width: 800px){
+  .userpage {
+    width: 70%;
+}
+
+.image-2 {
+  display: none;
+}
+
+
+
+}
+
+
+
+@media (max-width: 500px) {
+  .banner nav{
+    flex-direction: column;
+  }
+  .banner nav img {
+    width: 90%;
+  }
+
+  .banner nav .links{
+    width:90%;
+  }
+
+  .userWeb {
+    padding: 10px;
+  }
+ .userpage  {
+  width: 85%;
+  }
+.userWeb img {
+  height: 250px;
+  width: 100%;
+ 
+}
+  
+  .userevent .userpage h1 {
+    font-size: 2.8rem;
+    width:90%;
+    line-height: 1;
+    margin-bottom: 0;
+  }
+
+  .userevent .userpage p {
+    font-size: 2rem;
+    width:90%;
+    line-height: 1;
+    margin-bottom: 0;
+  }
+
+  .userevent .userpage h3 {
+    width:90%;
+    line-height: 1;
+    padding-bottom: 30px;
+    border-bottom: black solid 1px;
+    text-align: center;
+  }
+
+  .image-3 {
+    display: none;
+  }
+
+  .imagesDiv img{
+      width: 150px;
+  }
+
+  .active {
+    font-size: 1.7rem;
+  }
+
+  .createform label {
+      width: 70%;
+      font-size: 1.9rem;
+  }
+
+  .createform input  {
+    width: 70%;
+  }
+  .createform button {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  #editeFormid {
+    width: 98%;
+    position: static ;
+    margin: 20px;
+  }
+
+  #editeFormid label {
+    font-size: 1.6rem;
+  }
+
+  #editeFormid input {
+    width: 60%
+  }
+
+}
+
+
