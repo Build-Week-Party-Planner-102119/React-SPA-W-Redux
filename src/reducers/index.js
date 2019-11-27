@@ -15,74 +15,19 @@ import {
   GET_ALL_EVENTS_START,
   GET_ALL_EVENTS_SUCCESS,
   GET_ALL_EVENTS_FAILURE,
-  CREATE_EVENT,
+// create event
+  CREATE_EVENT_START,
+  CREATE_EVENT_SUCCESS,
+  CREATE_EVENT_FAILURE,
+
   DELETE_EVENT,
   EDIT_EVENT
 } from "../actions";
 
 const initialState = {
-  events: [
-    {
-      by: 8,
-      id: 0,
-      guestNumber: "11",
-      date: "11",
-      budget: "12",
-      entertainment: "jtest",
-      shoppingList: "test2",
-      title: "party"
-    },
-    {
-      by: 9,
-      id: 1,
-      guestNumber: "52",
-      date: "42",
-      budget: "6",
-      entertainment: "test1",
-      shoppingList: "test2",
-      title: "arty"
-    },
-    {
-      by: 9,
-      id: 2,
-      guestNumber: "5",
-      date: "4",
-      budget: "6787",
-      entertainment: "jay-z, kanya west",
-      shoppingList: "toiletress, spongebob, oswaldo",
-      title: "devins party"
-    },
-    {
-      by: 9,
-      id: 3,
-      guestNumber: "5",
-      date: "4",
-      budget: "6787",
-      entertainment: "jay-z, kanya west",
-      shoppingList: "toiletress, spongebob, oswaldo",
-      title: "devins party"
-    },
-    {
-      by: 9,
-      id: 4,
-      guestNumber: "5",
-      date: "4",
-      budget: "6787",
-      entertainment: "jay-z, kanya west",
-      shoppingList: "toiletress, spongebob, oswaldo",
-      title: "devins party"
-    },
-    {
-      by: 9,
-      id: 5,
-      guestNumber: "5",
-      date: "4",
-      budget: "6787",
-      entertainment: "jay-z, kanya west",
-      shoppingList: "toiletress, spongebob, oswaldo",
-      title: "devins party"
-    }
-  ],
+  events: [],
+  user: {},
+
   isLoading: false,
   error: null
 };
@@ -118,7 +63,7 @@ const reducer = (state = initialState, action) => {
     case SIGN_USER_SUCCESS:
       return {
         ...state,
-        // user: action.payload,
+        user: action.payload,
         isLoading: false,
         error: null
       };
@@ -128,13 +73,31 @@ const reducer = (state = initialState, action) => {
         error: action.payload,
         isLoading: false
       };
-    case CREATE_EVENT:
+    case CREATE_EVENT_START:
+      // return {
+      //   ...state,
+      //   events: [...state.events, action.payload],
+      //   error: null,
+      //   isLoading: false
+      // };
       return {
         ...state,
-        events: [...state.events, action.payload],
+        error: null,
+        isLoading: true
+      };
+    case CREATE_EVENT_SUCCESS:
+      return {
+        ...state,
         error: null,
         isLoading: false
       };
+    case CREATE_EVENT_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+        isLoading: false
+      };
+
     case DELETE_EVENT:
       console.log("case delete event");
       const newArr = state.events.filter(item => {
@@ -168,25 +131,26 @@ const reducer = (state = initialState, action) => {
         error: null,
         isLoading: false
       };
-    // case GET_USER_EVENTS_START:
-    //   return {
-    //     ...state,
-    //     error: null,
-    //     isLoading: true
-    //   };
-    // case GET_USER_EVENTS_SUCCESS:
-    //   return {
-    //     ...state,
-    //     user: { ...state.user, userevents: action.payload },
-    //     isLoading: false,
-    //     error: null
-    //   };
-    // case GET_USER_EVENTS_FAILURE:
-    //   return {
-    //     ...state,
-    //     error: action.payload,
-    //     isLoading: false
-    //   };
+    case GET_USER_EVENTS_START:
+      console.log("getting user events firing")
+      return {
+        ...state,
+        error: null,
+        isLoading: true
+      };
+    case GET_USER_EVENTS_SUCCESS:
+      return {
+        ...state,
+        events:  action.payload ,
+        isLoading: false,
+        error: null
+      };
+    case GET_USER_EVENTS_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+        isLoading: false
+      };
     // case GET_ALL_EVENTS_START:
     //   return {
     //     ...state,

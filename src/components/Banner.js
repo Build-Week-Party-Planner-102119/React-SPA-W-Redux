@@ -14,21 +14,23 @@ function Banner(props) {
 
   return (
     <div className="banner">
-      <nav> 
+      <nav>
         <div>
           <img src={Logo} alt="" width="300px" height="50px" />
         </div>
         <div className="links">
           {localStorage.getItem("token") ? (
-            <NavLink to={`allevents${myid.toString()}`}>All Events</NavLink>
+            <NavLink to={`allevents${myid}`}>All Events</NavLink>
           ) : null}
           {localStorage.getItem("token") ? (
-            <NavLink to={`userpage${myid.toString()}`}>My Events</NavLink>
+            <NavLink to={`userpage${myid}`}>My Events</NavLink>
           ) : null}
         </div>
         <div className="register">
           {localStorage.getItem("token") ? (
-            <button className = "logout" onClick={clickPush}>Log Out</button>
+            <button className="logout" onClick={clickPush}>
+              Log Out
+            </button>
           ) : null}
         </div>
       </nav>

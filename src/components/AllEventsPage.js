@@ -10,7 +10,7 @@ function AllEventsPage(props) {
   //       .then()
   //       .catch();
   //   });
-
+console.log(" im the user",props.user)
   return (
     <>
     <div className = "imagesDiv">
@@ -33,6 +33,7 @@ function AllEventsPage(props) {
 const mapStateToProps = state => {
   return {
     // user: state.user,
+    user: state.user,
     events: state.events,
     isLoading: state.isLoading,
     error: state.error

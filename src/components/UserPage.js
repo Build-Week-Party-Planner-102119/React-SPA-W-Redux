@@ -3,18 +3,21 @@ import { Link } from "react-router-dom";
 // import axios from "axios";
 import { connect } from "react-redux";
 import UserEvent from "./UserEvent";
+import { getUserEvents } from "../actions";
 
 function UserPage(props) {
-  // useEffect(() =>{
-  //   axios
-  //   .get()
-  //   .then()
-  //   .catch()
-  // })
+
+  console.log("im events", props.events)
+
+  useEffect(() => {
+    console.log("useeffect")
+    getUserEvents(props.match.params.id);
+    console.log("done getting events")
+  },[]);
 
   return (
     <div className="userWeb">
-      <img src = "/image1.jpg" width = "99%" height = "450px"/>
+      <img src="/image1.jpg" width="99%" height="450px" />
       <Link
         className="createlink"
         to={`createevent${props.match.params.id.toString()}`}
@@ -23,12 +26,7 @@ function UserPage(props) {
       </Link>
       <div className="userevent">
         {props.events.map(index => {
-          if (index.by.toString() === localStorage.getItem("id")) {
-            console.log("im in if", index);
-            return <UserEvent index={index} />;
-          } else {
-            return null;
-          }
+          return <UserEvent index={index} />;
         })}
       </div>
     </div>
@@ -46,5 +44,5 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
 
-  null
+  { getUserEvents }
 )(UserPage);

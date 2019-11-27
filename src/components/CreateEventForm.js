@@ -5,7 +5,6 @@ import { CreateEvent } from "../actions";
 
 function CreateEventForm(props) {
   const [input, setInput] = useState({
-    by: localStorage.getItem("id"),
     guestNumber: "",
     date: "",
     budget: "",
@@ -19,17 +18,15 @@ function CreateEventForm(props) {
 
   const submitForm = e => {
     e.preventDefault();
-    props.CreateEvent(input);
+    props.CreateEvent(input, props.match.params.id);
     console.log("i am input", input);
     setInput({
-      by: localStorage.getItem("id"),
       title: "",
       guestNumber: "",
       date: "",
       budget: "",
       entertainment: "",
-      shoppingList: "",
-      id: Date.now()
+      shoppingList: ""
     });
     console.log(props);
     props.history.push(`/userpage${props.match.params.id.toString()}`);
@@ -38,7 +35,7 @@ function CreateEventForm(props) {
   return (
     <FormWrapDiv className="FormWrap">
       <h1>Create Event </h1>
-      <RegForm onSubmit={submitForm} className = "createform">
+      <RegForm onSubmit={submitForm} className="createform">
         <label>Party Name</label>
         <input
           type="text"
@@ -107,7 +104,4 @@ const mapStateToProps = state => {
     error: state.error
   };
 };
-export default connect(
-  mapStateToProps,
-  { CreateEvent }
-)(CreateEventForm);
+export default connect(mapStateToProps, { CreateEvent })(CreateEventForm);

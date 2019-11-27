@@ -1,14 +1,12 @@
 import axios from "axios";
 import history from "../history";
-import { axiosWithAuth } from "../utilities/AxiosWithAuth";
+import axiosWithAuth from "../utilities/AxiosWithAuth";
 
-const registerEndPoint =
-  "https://party-planner-lambda.herokuapp.com/api/auth/register";
-const signEndPoint =
-  "https://party-planner-lambda.herokuapp.com/api/auth/login";
-const getUserEventsEndPoint = "";
+const registerEndPoint = "https://partyplannerbe.herokuapp.com/auth/register";
+const signEndPoint = "https://partyplannerbe.herokuapp.com/auth/login";
+const getUserEventsEndPoint = "https://partyplannerbe.herokuapp.com/parties/";
 const getAllEventsEndPoint = "";
-const CreateEventEndPoint = "";
+const CreateEventEndPoint = "https://partyplannerbe.herokuapp.com/parties/";
 
 export const REGISTER_USER_START = "REGISTER_USER_START";
 export const REGISTER_USER_SUCCESS = "REGISTER_USER_SUCCESS";
@@ -25,6 +23,10 @@ export const GET_USER_EVENTS_FAILURE = "GET_USER_EVENTS_FAILURE";
 export const GET_ALL_EVENTS_START = "GET_ALL_EVENTS_START";
 export const GET_ALL_EVENTS_SUCCESS = "GET_ALL_EVENTS_SUCCESS";
 export const GET_ALL_EVENTS_FAILURE = "GET_ALL_EVENTS_FAILURE";
+
+export const CREATE_EVENT_START = "CREATE_EVENT_START";
+export const CREATE_EVENT_SUCCESS = "CREATE_EVENT_SUCCESS";
+export const CREATE_EVENT_FAILURE = "CREATE_EVENTET_ALL_EVENTS_FAILURE";
 
 export const CREATE_EVENT = "CREATE_EVENT";
 export const DELETE_EVENT = "DELETE_EVENT";
@@ -56,7 +58,11 @@ export const signIn = user => {
       // .post("https://jso")
 
       .then(res => {
-        dispatch({ type: SIGN_USER_SUCCESS, payload: res.data });
+        // const userobj = { res.data }
+        dispatch({
+          type: SIGN_USER_SUCCESS,
+          payload: { id: res.data.id, username: res.data.username }
+        });
         console.log("im res from sign in", res);
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("id", res.data.id);
@@ -65,11 +71,14 @@ export const signIn = user => {
       .catch(error => dispatch({ type: SIGN_USER_FAILURE, payload: error }));
   };
 };
-export const getUserEvents = () => {
+export const getUserEvents = id => {
+  console.log("getting user events");
+  console.log(id);
   return dispatch => {
-    dispatch({ type: GET_USER_EVENTS_START });
-    axios
-      .get(getUserEventsEndPoint)
+    console.log("im after line 77");
+    dispatch({ type: GET_USER_EVENTS_START});
+    axiosWithAuth()
+      .get(`${getUserEventsEndPoint + id}`)
       .then(res => {
         dispatch({ type: GET_USER_EVENTS_SUCCESS, payload: res.data });
       })
@@ -92,10 +101,21 @@ export const getALLEvents = () => {
   };
 };
 
-export const CreateEvent = event => {
+export const CreateEvent = (event, id) => {
+  console.log("im the event", event);
   return dispatch => {
-    dispatch({ type: CREATE_EVENT, payload: event });
-    console.log("event", event);
+    dispatch({ type: CREATE_EVENT_START });
+    axiosWithAuth()
+      .post(`${CreateEventEndPoint + id}`, event)
+
+      .then(res => {
+        console.log("createdevent", res);
+        // dispatch({ type: CREATE_EVENT_SUCCESS, payload: {...event, planner_id:id}});
+        dispatch({ type: CREATE_EVENT_SUCCESS });
+      })
+      .catch(error =>
+        dispatch({ type: GET_ALL_EVENTS_FAILURE, payload: error })
+      );
   };
 };
 export const deleteItem = id => {
