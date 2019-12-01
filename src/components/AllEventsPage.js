@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
 import AllEvent from "./AllEvent";
 import { connect } from "react-redux";
+import { getALLEvents } from "../actions";
 
 function AllEventsPage(props) {
-  //   useEffect(() => props{
-  //     axios
-  //       .get()
-  //       .then()
-  //       .catch();
-  //   });
+    useEffect(() => {
+     props.getALLEvents()
+    },[]);
+  
+
 console.log(" im the user",props.user)
   return (
     <>
@@ -23,7 +22,7 @@ console.log(" im the user",props.user)
     </div>
     <div className="userevent">
       {props.events.map(index => (
-        <AllEvent index={index} />
+        <AllEvent key={index.id} index={index} />
       ))}
     </div>
     </>
@@ -41,5 +40,5 @@ const mapStateToProps = state => {
 };
 export default connect(
   mapStateToProps,
-  null
+  {getALLEvents}
 )(AllEventsPage);

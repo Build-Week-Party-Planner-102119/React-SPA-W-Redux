@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import Logo from "./logo.png";
 
 function Banner(props) {
-  console.log("banner props", props);
   const clickPush = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("id");

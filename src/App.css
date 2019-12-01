@@ -572,4 +572,7 @@ footer  p {
 
 }
 
-
+.validation{
+  color:red;
+  font-size: 1.3rem;
+}

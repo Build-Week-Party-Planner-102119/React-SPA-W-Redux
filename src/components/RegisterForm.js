@@ -12,14 +12,11 @@ export const FormWrapDiv = styled.div`
   justify-content: center;
   align-items: center;
 
-  @media (max-width:800px){
-    padding:0;
+  @media (max-width: 800px) {
+    padding: 0;
     min-height: 80vh;
   }
-
- 
-  
-  `;
+`;
 
 export const RegForm = styled.form`
   display: flex;
@@ -40,6 +37,7 @@ function RegisterForm(props) {
 
   const submitForm = e => {
     e.preventDefault();
+
     props.registerUser(input);
     setInput({
       username: "",
@@ -69,6 +67,7 @@ function RegisterForm(props) {
           placeholder="Enter Password"
           value={input.password}
         />
+
         {props.error && <div>{props.error.message}</div>}
 
         <button className="submitbtn">Register</button>
@@ -87,7 +86,4 @@ const mapStateToProps = state => {
     error: state.error
   };
 };
-export default connect(
-  mapStateToProps,
-  { registerUser }
-)(RegisterForm);
+export default connect(mapStateToProps, { registerUser })(RegisterForm);

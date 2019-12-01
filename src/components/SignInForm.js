@@ -13,12 +13,14 @@ function SignInForm(props) {
 
   const submitForm = e => {
     e.preventDefault();
+
     props.signIn(input);
     setInput({
       username: "",
       password: ""
     });
   };
+
   return (
     <FormWrapDiv className="FormWrap">
       <h1>Sign In</h1>
@@ -32,6 +34,7 @@ function SignInForm(props) {
           placeholder="Enter username"
           value={input.username}
         />
+        
         <label>Password</label>
         <input
           type="password"
@@ -40,7 +43,8 @@ function SignInForm(props) {
           placeholder="Enter Password"
           value={input.password}
         />
-              {props.error && <div>{props.error.message}</div>}
+       
+      
 
         <button className="submitbtn">Sign In</button>
       </RegForm>
@@ -58,7 +62,4 @@ const mapStateToProps = state => {
     error: state.error
   };
 };
-export default connect(
-  mapStateToProps,
-  { signIn }
-)(SignInForm);
+export default connect(mapStateToProps, { signIn })(SignInForm);

@@ -15,13 +15,18 @@ import {
   GET_ALL_EVENTS_START,
   GET_ALL_EVENTS_SUCCESS,
   GET_ALL_EVENTS_FAILURE,
-// create event
+  // create event
   CREATE_EVENT_START,
   CREATE_EVENT_SUCCESS,
   CREATE_EVENT_FAILURE,
-
-  DELETE_EVENT,
-  EDIT_EVENT
+  // delete event
+  DELETE_EVENT_START,
+  DELETE_EVENT_SUCCESS,
+  DELETE_EVENT_FAILURE,
+  // edit events
+  EDIT_EVENT_START,
+  EDIT_EVENT_SUCCESS,
+  EDIT_EVENT_FAILURE
 } from "../actions";
 
 const initialState = {
@@ -33,7 +38,6 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-  console.log("I am in reducer().");
   console.log("action.type: " + action.type);
   switch (action.type) {
     case REGISTER_USER_START:
@@ -74,12 +78,6 @@ const reducer = (state = initialState, action) => {
         isLoading: false
       };
     case CREATE_EVENT_START:
-      // return {
-      //   ...state,
-      //   events: [...state.events, action.payload],
-      //   error: null,
-      //   isLoading: false
-      // };
       return {
         ...state,
         error: null,
@@ -97,42 +95,7 @@ const reducer = (state = initialState, action) => {
         error: action.payload,
         isLoading: false
       };
-
-    case DELETE_EVENT:
-      console.log("case delete event");
-      const newArr = state.events.filter(item => {
-        return item.id !== action.payload;
-      });
-
-      return {
-        ...state,
-        events: newArr,
-        error: null,
-        isLoading: false
-      };
-    case EDIT_EVENT:
-      console.log("I am in EDIT_EVENT");
-      for (let i = 0; i < state.events.length; i++) {
-        if (state.events[i].id === action.payload.id) {
-          // state.events[i] = action.payload;
-          state.events[i].budget = action.payload.budget;
-          state.events[i].date = action.payload.date;
-          state.events[i].entertainment = action.payload.entertainment;
-          state.events[i].guestNumber = action.payload.guestNumber;
-          state.events[i].shoppingList = action.payload.shoppingList;
-          state.events[i].title = action.payload.title;
-        } else {
-        }
-      }
-
-      return {
-        ...state,
-        events: state.events,
-        error: null,
-        isLoading: false
-      };
     case GET_USER_EVENTS_START:
-      console.log("getting user events firing")
       return {
         ...state,
         error: null,
@@ -141,7 +104,7 @@ const reducer = (state = initialState, action) => {
     case GET_USER_EVENTS_SUCCESS:
       return {
         ...state,
-        events:  action.payload ,
+        events: action.payload,
         isLoading: false,
         error: null
       };
@@ -151,25 +114,63 @@ const reducer = (state = initialState, action) => {
         error: action.payload,
         isLoading: false
       };
-    // case GET_ALL_EVENTS_START:
-    //   return {
-    //     ...state,
-    //     error: null,
-    //     isLoading: true
-    //   };
-    // case GET_ALL_EVENTS_SUCCESS:
-    //   return {
-    //     ...state,
-    //     allevents: action.payload,
-    //     isLoading: false,
-    //     error: null
-    //   };
-    // case GET_ALL_EVENTS_FAILURE:
-    //   return {
-    //     ...state,
-    //     error: action.payload,
-    //     isLoading: false
-    //   };
+    case GET_ALL_EVENTS_START:
+      return {
+        ...state,
+        error: null,
+        isLoading: true
+      };
+    case GET_ALL_EVENTS_SUCCESS:
+      return {
+        ...state,
+        events: action.payload,
+        isLoading: false,
+        error: null
+      };
+    case GET_ALL_EVENTS_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+        isLoading: false
+      };
+
+    case DELETE_EVENT_START:
+      return {
+        ...state,
+        error: null,
+        isLoading: true
+      };
+    case DELETE_EVENT_SUCCESS:
+      return {
+        ...state,
+        error: null,
+        isLoading: false
+      };
+    case DELETE_EVENT_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+        isLoading: false
+      };
+
+    case EDIT_EVENT_START:
+      return {
+        ...state,
+        error: null,
+        isLoading: true
+      };
+    case EDIT_EVENT_SUCCESS:
+      return {
+        ...state,
+        error: null,
+        isLoading: false
+      };
+    case EDIT_EVENT_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+        isLoading: false
+      };
     default:
       return state;
   }

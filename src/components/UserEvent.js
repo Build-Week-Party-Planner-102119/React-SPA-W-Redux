@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Styled from "styled-components";
 import { deleteItem, editItem } from "../actions";
 import { connect } from "react-redux";
-import { numberTypeAnnotation } from "@babel/types";
 import { RegForm } from './RegisterForm'
 
 const CardDiv = Styled.div `
@@ -40,7 +39,7 @@ const UserEvent = props => {
   const onSaveSubmit = e => {
     console.log("onSaveSubmit().");
     e.preventDefault();
-    props.editItem(input);
+    props.editItem(input, props.index.id, props.userId);
     setEditing(!editing);
   };
 
@@ -49,7 +48,7 @@ const UserEvent = props => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
-  console.log(props);
+  
   return (
     <>
       <CardDiv className="userpage">
@@ -75,7 +74,7 @@ const UserEvent = props => {
           className="submitbtn btn"
           onClick={() => {
             console.log("click");
-            props.deleteItem(props.index.id);
+            props.deleteItem(props.index.id, props.userId)
           }}
         >
           Delete

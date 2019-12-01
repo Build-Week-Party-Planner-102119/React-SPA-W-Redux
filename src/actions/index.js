@@ -5,8 +5,10 @@ import axiosWithAuth from "../utilities/AxiosWithAuth";
 const registerEndPoint = "https://partyplannerbe.herokuapp.com/auth/register";
 const signEndPoint = "https://partyplannerbe.herokuapp.com/auth/login";
 const getUserEventsEndPoint = "https://partyplannerbe.herokuapp.com/parties/";
-const getAllEventsEndPoint = "";
+const getAllEventsEndPoint = "https://partyplannerbe.herokuapp.com/parties/";
 const CreateEventEndPoint = "https://partyplannerbe.herokuapp.com/parties/";
+const deleteEventsEndpoint = "https://partyplannerbe.herokuapp.com/parties/";
+const editEventsEndpoint = "https://partyplannerbe.herokuapp.com/parties/";
 
 export const REGISTER_USER_START = "REGISTER_USER_START";
 export const REGISTER_USER_SUCCESS = "REGISTER_USER_SUCCESS";
@@ -28,9 +30,13 @@ export const CREATE_EVENT_START = "CREATE_EVENT_START";
 export const CREATE_EVENT_SUCCESS = "CREATE_EVENT_SUCCESS";
 export const CREATE_EVENT_FAILURE = "CREATE_EVENTET_ALL_EVENTS_FAILURE";
 
-export const CREATE_EVENT = "CREATE_EVENT";
-export const DELETE_EVENT = "DELETE_EVENT";
-export const EDIT_EVENT = "EDIT_EVENT";
+export const DELETE_EVENT_START = "DELETE_EVENT_START";
+export const DELETE_EVENT_SUCCESS = "DELETE_EVENT_SUCCESS";
+export const DELETE_EVENT_FAILURE = "DELETE_EVENT_FAILURE";
+
+export const EDIT_EVENT_START = "EDIT_EVENT_START";
+export const EDIT_EVENT_SUCCESS = "EDIT_EVENT_SUCCESS";
+export const EDIT_EVENT_FAILURE = "DELETE_EVENT_FAILURE";
 
 export const registerUser = user => {
   return dispatch => {
@@ -41,7 +47,7 @@ export const registerUser = user => {
       .post(registerEndPoint, user)
       .then(res => {
         dispatch({ type: REGISTER_USER_SUCCESS, payload: res.data });
-        console.log("im res from register", res);
+
         history.push("/");
       })
       .catch(error => {
@@ -63,7 +69,7 @@ export const signIn = user => {
           type: SIGN_USER_SUCCESS,
           payload: { id: res.data.id, username: res.data.username }
         });
-        console.log("im res from sign in", res);
+
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("id", res.data.id);
         history.push(`/userpage${res.data.id}`);
@@ -72,11 +78,8 @@ export const signIn = user => {
   };
 };
 export const getUserEvents = id => {
-  console.log("getting user events");
-  console.log(id);
   return dispatch => {
-    console.log("im after line 77");
-    dispatch({ type: GET_USER_EVENTS_START});
+    dispatch({ type: GET_USER_EVENTS_START });
     axiosWithAuth()
       .get(`${getUserEventsEndPoint + id}`)
       .then(res => {
@@ -90,7 +93,7 @@ export const getUserEvents = id => {
 export const getALLEvents = () => {
   return dispatch => {
     dispatch({ type: GET_ALL_EVENTS_START });
-    axios
+    axiosWithAuth()
       .get(getAllEventsEndPoint)
       .then(res => {
         dispatch({ type: GET_ALL_EVENTS_SUCCESS, payload: res.data });
@@ -102,33 +105,60 @@ export const getALLEvents = () => {
 };
 
 export const CreateEvent = (event, id) => {
-  console.log("im the event", event);
   return dispatch => {
     dispatch({ type: CREATE_EVENT_START });
     axiosWithAuth()
       .post(`${CreateEventEndPoint + id}`, event)
-
       .then(res => {
-        console.log("createdevent", res);
         // dispatch({ type: CREATE_EVENT_SUCCESS, payload: {...event, planner_id:id}});
         dispatch({ type: CREATE_EVENT_SUCCESS });
+        history.push(`/userpage${id}`);
       })
       .catch(error =>
         dispatch({ type: GET_ALL_EVENTS_FAILURE, payload: error })
       );
   };
 };
-export const deleteItem = id => {
+export const deleteItem = (id, userId) => {
   console.log("dispatch", id);
-
   return dispatch => {
-    console.log("dispatch here", id);
-    dispatch({ type: DELETE_EVENT, payload: id });
-    console.log("delete", id);
+    dispatch({ type: DELETE_EVENT_START });
+    axiosWithAuth()
+      .delete(`${deleteEventsEndpoint + id}`)
+      .then(res => {
+        dispatch({ type: DELETE_EVENT_SUCCESS });
+        axiosWithAuth()
+          .get(`${getUserEventsEndPoint + userId}`)
+          .then(res => {
+            dispatch({ type: GET_USER_EVENTS_SUCCESS, payload: res.data });
+          })
+          .catch(error =>
+            dispatch({ type: GET_USER_EVENTS_FAILURE, payload: error })
+          );
+      })
+      .catch(error => {
+        dispatch({ type: DELETE_EVENT_FAILURE, payload: error });
+      });
   };
 };
-export const editItem = object => {
+export const editItem = (object, id, userId) => {
   return dispatch => {
-    dispatch({ type: EDIT_EVENT, payload: object });
+    dispatch({ type: EDIT_EVENT_START });
+    axiosWithAuth()
+      .put(`${editEventsEndpoint + id}`, object)
+      .then(res => {
+        dispatch({ type: EDIT_EVENT_SUCCESS });
+        axiosWithAuth()
+          .get(`${getUserEventsEndPoint + userId}`)
+          .then(res => {
+            dispatch({ type: GET_USER_EVENTS_SUCCESS, payload: res.data });
+          })
+          .catch(error =>
+            dispatch({ type: GET_USER_EVENTS_FAILURE, payload: error })
+          );
+      })
+      .catch(error => {
+        dispatch({ type: EDIT_EVENT_FAILURE, payload: error });
+      });
   };
 };

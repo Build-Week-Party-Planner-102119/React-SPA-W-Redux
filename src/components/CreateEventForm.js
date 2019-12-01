@@ -28,8 +28,6 @@ function CreateEventForm(props) {
       entertainment: "",
       shoppingList: ""
     });
-    console.log(props);
-    props.history.push(`/userpage${props.match.params.id.toString()}`);
   };
 
   return (

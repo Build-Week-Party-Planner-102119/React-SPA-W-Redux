@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect } from "react";
 import { Link } from "react-router-dom";
 // import axios from "axios";
 import { connect } from "react-redux";
@@ -6,13 +6,12 @@ import UserEvent from "./UserEvent";
 import { getUserEvents } from "../actions";
 
 function UserPage(props) {
-
-  console.log("im events", props.events)
+const userID = props.match.params.id
 
   useEffect(() => {
-    console.log("useeffect")
-    getUserEvents(props.match.params.id);
-    console.log("done getting events")
+    
+    props.getUserEvents(userID);
+   
   },[]);
 
   return (
@@ -26,7 +25,7 @@ function UserPage(props) {
       </Link>
       <div className="userevent">
         {props.events.map(index => {
-          return <UserEvent index={index} />;
+          return <UserEvent userId={userID} key={index.id} index={index} getUserEvents={getUserEvents}/>;
         })}
       </div>
     </div>
@@ -37,6 +36,7 @@ const mapStateToProps = state => {
   return {
     // user: state.user,
     events: state.events,
+    user: state.user,
     isLoading: state.isLoading,
     error: state.error
   };
